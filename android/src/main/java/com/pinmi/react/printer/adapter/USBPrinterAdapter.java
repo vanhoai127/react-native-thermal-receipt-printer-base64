@@ -248,7 +248,7 @@ public class USBPrinterAdapter implements PrinterAdapter {
     }
 
     @Override
-    public void printImageBase64(final Bitmap bitmapImage, int isImin, int imageWidth, int imageHeight, Callback errorCallback) {
+    public void printImageBase64(final Bitmap bitmapImage, int isImin, boolean isPageEnd, int imageWidth, int imageHeight, Callback errorCallback) {
         if (bitmapImage == null) {
             errorCallback.invoke("image not found");
             return;

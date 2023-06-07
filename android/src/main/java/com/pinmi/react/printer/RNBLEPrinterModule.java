@@ -73,10 +73,10 @@ public class RNBLEPrinterModule extends ReactContextBaseJavaModule implements RN
 
     @ReactMethod
     @Override
-    public void printImageBase64(String base64, int isImin, int imageWidth, int imageHeight, Callback errorCallback) {
+    public void printImageBase64(String base64, int isImin, boolean isPageEnd, int imageWidth, int imageHeight, Callback errorCallback) {
         byte[] decodedString = Base64.decode(base64, Base64.DEFAULT);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        adapter.printImageBase64(decodedByte, isImin, imageWidth, imageHeight,errorCallback);
+        adapter.printImageBase64(decodedByte, isImin, isPageEnd, imageWidth, imageHeight,errorCallback);
     }
 
     

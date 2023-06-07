@@ -240,7 +240,7 @@ public class BLEPrinterAdapter implements PrinterAdapter{
     }
 
     @Override
-    public void printImageBase64(final Bitmap bitmapImage, int isImin, int imageWidth, int imageHeight,Callback errorCallback) {
+    public void printImageBase64(final Bitmap bitmapImage, int isImin, boolean isPageEnd, int imageWidth, int imageHeight,Callback errorCallback) {
         if(bitmapImage == null) {
             errorCallback.invoke("image not found");
             return;
@@ -280,13 +280,17 @@ public class BLEPrinterAdapter implements PrinterAdapter{
                 }
                 
             }
-            printerOutputStream.write(SET_LINE_SPACE_32);
-            printerOutputStream.write(LINE_FEED);
-            printerOutputStream.write(LINE_FEED);
-            if(isImin != -1 )
+            if(isPageEnd)
             {
+                printerOutputStream.write(SET_LINE_SPACE_32);
                 printerOutputStream.write(LINE_FEED);
+                printerOutputStream.write(LINE_FEED);
+                if(isImin != -1 )
+                {
+                    printerOutputStream.write(LINE_FEED);
+                }
             }
+            
             printerOutputStream.flush();
         } catch (IOException e) {
             Log.e(LOG_TAG, "failed to print data");
@@ -441,6 +445,7 @@ public class BLEPrinterAdapter implements PrinterAdapter{
                 // Do a line feed, if not the printing will resume on the same line
                 printerOutputStream.write(LINE_FEED);
             }
+
             printerOutputStream.write(SET_LINE_SPACE_32);
             printerOutputStream.write(LINE_FEED);
 

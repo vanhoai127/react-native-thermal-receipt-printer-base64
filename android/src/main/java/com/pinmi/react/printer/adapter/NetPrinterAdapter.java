@@ -290,9 +290,12 @@ public class NetPrinterAdapter implements PrinterAdapter {
                 }
             }
             
-            printerOutputStream.write(SET_LINE_SPACE_32);
-            printerOutputStream.write(LINE_FEED);
-
+            if(isPageEnd)
+            {
+                printerOutputStream.write(SET_LINE_SPACE_32);
+                printerOutputStream.write(LINE_FEED);    
+            }
+            
             printerOutputStream.flush();
         } catch (IOException e) {
             Log.e(LOG_TAG, "failed to print data");

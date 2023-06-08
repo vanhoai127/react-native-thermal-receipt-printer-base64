@@ -150,7 +150,7 @@ export var USBPrinter = {
       return console.warn(error);
     });
   },
-  printImageBase64: function (Base64, isImin, isPageEnd, opts) {
+  printImageBase64: function (Base64, isImin, opts) {
     var _a, _b;
     if (opts === void 0) {
       opts = {};
@@ -159,15 +159,9 @@ export var USBPrinter = {
       /**
        * just development
        */
-      RNUSBPrinter.printImageBase64(
-        Base64,
-        isImin,
-        isPageEnd,
-        opts,
-        function (error) {
-          return console.warn(error);
-        }
-      );
+      RNUSBPrinter.printImageBase64(Base64, isImin, opts, function (error) {
+        return console.warn(error);
+      });
     } else {
       /**
        * just development
@@ -175,7 +169,6 @@ export var USBPrinter = {
       RNUSBPrinter.printImageBase64(
         Base64,
         isImin,
-        isPageEnd,
         (_a = opts === null || opts === void 0 ? void 0 : opts.imageWidth) !==
           null && _a !== void 0
           ? _a
@@ -331,7 +324,7 @@ export var BLEPrinter = {
    * @param Base64
    * @param opts
    */
-  printImageBase64: function (Base64, isImin, isPageEnd, opts) {
+  printImageBase64: function (Base64, isImin, opts) {
     var _a, _b;
     if (opts === void 0) {
       opts = {};
@@ -340,15 +333,9 @@ export var BLEPrinter = {
       /**
        * just development
        */
-      RNBLEPrinter.printImageBase64(
-        Base64,
-        isImin,
-        isPageEnd,
-        opts,
-        function (error) {
-          return console.warn(error);
-        }
-      );
+      RNBLEPrinter.printImageBase64(Base64, isImin, opts, function (error) {
+        return console.warn(error);
+      });
     } else {
       /**
        * just development
@@ -356,7 +343,6 @@ export var BLEPrinter = {
       RNBLEPrinter.printImageBase64(
         Base64,
         isImin,
-        isPageEnd,
         (_a = opts === null || opts === void 0 ? void 0 : opts.imageWidth) !==
           null && _a !== void 0
           ? _a
@@ -514,7 +500,7 @@ export var NetPrinter = {
       });
     }
   },
-  printImageBase64: function (Base64, isImin, isPageEnd, opts) {
+  printImageBase64: function (Base64, isImin, opts) {
     var _a, _b;
     if (opts === void 0) {
       opts = {};
@@ -523,15 +509,9 @@ export var NetPrinter = {
       /**
        * just development
        */
-      RNNetPrinter.printImageBase64(
-        Base64,
-        isImin,
-        isPageEnd,
-        opts,
-        function (error) {
-          return console.warn(error);
-        }
-      );
+      RNNetPrinter.printImageBase64(Base64, isImin, opts, function (error) {
+        return console.warn(error);
+      });
     } else {
       /**
        * just development
@@ -539,7 +519,6 @@ export var NetPrinter = {
       RNNetPrinter.printImageBase64(
         Base64,
         isImin,
-        isPageEnd,
         (_a = opts === null || opts === void 0 ? void 0 : opts.imageWidth) !==
           null && _a !== void 0
           ? _a

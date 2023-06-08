@@ -248,7 +248,7 @@ public class USBPrinterAdapter implements PrinterAdapter {
     }
 
     @Override
-    public void printImageBase64(final Bitmap bitmapImage, int isImin, boolean isPageEnd, int imageWidth, int imageHeight, Callback errorCallback) {
+    public void printImageBase64(final Bitmap bitmapImage, int isImin, int imageWidth, int imageHeight, Callback errorCallback) {
         if (bitmapImage == null) {
             errorCallback.invoke("image not found");
             return;
@@ -284,11 +284,9 @@ public class USBPrinterAdapter implements PrinterAdapter {
                 // Do a line feed, if not the printing will resume on the same line
                 mUsbDeviceConnection.bulkTransfer(mEndPoint, LINE_FEED, LINE_FEED.length, 100000);
             }
-            if(isPageEnd)
-            {
             mUsbDeviceConnection.bulkTransfer(mEndPoint, SET_LINE_SPACE_32, SET_LINE_SPACE_32.length, 100000);
             mUsbDeviceConnection.bulkTransfer(mEndPoint, LINE_FEED, LINE_FEED.length, 100000);
-            }
+            
         } else {
             String msg = "failed to connected to device";
             Log.v(LOG_TAG, msg);
@@ -525,7 +523,7 @@ public class USBPrinterAdapter implements PrinterAdapter {
     }
 
     private boolean shouldPrintColor(int col) {
-        final int threshold = 127;
+        final int threshold = 170;
         int a, r, g, b, luminance;
         a = (col >> 24) & 0xff;
         if (a != 0xff) {// Ignore transparencies

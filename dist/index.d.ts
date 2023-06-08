@@ -45,7 +45,6 @@ export declare const USBPrinter: {
   printImageBase64: (
     Base64: string,
     isImin: number,
-    isPageEnd: boolean,
     opts?: PrinterImageOptions
   ) => void;
 };
@@ -62,7 +61,6 @@ export declare const BLEPrinter: {
   printImageBase64: (
     Base64: string,
     isImin: number,
-    isPageEnd: boolean,
     opts?: PrinterImageOptions
   ) => void;
 };
@@ -79,7 +77,6 @@ export declare const NetPrinter: {
   printImageBase64: (
     Base64: string,
     isImin: number,
-    isPageEnd: boolean,
     opts?: PrinterImageOptions
   ) => void;
 };

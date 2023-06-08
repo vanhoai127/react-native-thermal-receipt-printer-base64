@@ -250,7 +250,7 @@ public class NetPrinterAdapter implements PrinterAdapter {
 
     }
     @Override
-    public void printImageBase64(final Bitmap bitmapImage, int isImin, boolean isPageEnd, int imageWidth, int imageHeight, Callback errorCallback) {
+    public void printImageBase64(final Bitmap bitmapImage, int isImin, int imageWidth, int imageHeight, Callback errorCallback) {
         if (bitmapImage == null) { 
             errorCallback.invoke("image not found");
             return;
@@ -290,13 +290,13 @@ public class NetPrinterAdapter implements PrinterAdapter {
                 }
             }
             
-            if(isPageEnd)
-            {
-                printerOutputStream.write(SET_LINE_SPACE_32);
-                printerOutputStream.write(LINE_FEED);    
-            }
-            
+            printerOutputStream.write(SET_LINE_SPACE_32);
+            printerOutputStream.write(LINE_FEED); 
+            printerOutputStream.write(LINE_FEED);
+            printerOutputStream.write(LINE_FEED);
+            printerOutputStream.write(LINE_FEED);            
             printerOutputStream.flush();
+            
         } catch (IOException e) {
             Log.e(LOG_TAG, "failed to print data");
             e.printStackTrace();
@@ -525,7 +525,7 @@ public class NetPrinterAdapter implements PrinterAdapter {
     }
 
     private boolean shouldPrintColor(int col) {
-        final int threshold = 127;
+        final int threshold = 170;
         int a, r, g, b, luminance;
         a = (col >> 24) & 0xff;
         if (a != 0xff) {// Ignore transparencies

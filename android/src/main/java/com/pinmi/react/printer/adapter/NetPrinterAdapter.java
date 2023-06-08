@@ -356,9 +356,7 @@ public class NetPrinterAdapter implements PrinterAdapter {
                     // for each stripe, recollect 3 bytes (3 bytes = 24 bits)
                     printerOutputStream.write(recollectSlice(y, x, pixels));
                 }
-
-                // Do a line feed, if not the printing will resume on the same line
-                
+                // Do a line feed, if not the printing will resume on the same line                
                 printerOutputStream.write(LINE_FEED);
                 
             }

@@ -255,14 +255,12 @@ public class NetPrinterAdapter implements PrinterAdapter {
             errorCallback.invoke("image not found");
             return;
         }
-
         if (this.mSocket == null) {
             errorCallback.invoke("Net connection is not built, may be you forgot to connectPrinter");
             return;
         }
 
         final Socket socket = this.mSocket;
-
         try {
             int[][] pixels = getPixelsSlowV2(bitmapImage, imageWidth, imageHeight);
 
@@ -282,7 +280,6 @@ public class NetPrinterAdapter implements PrinterAdapter {
                     // for each stripe, recollect 3 bytes (3 bytes = 24 bits)
                     printerOutputStream.write(recollectSlice(y, x, pixels));
                 }
-
                 // Do a line feed, if not the printing will resume on the same line
                 if(isImin != -1 )
                 {
@@ -292,9 +289,28 @@ public class NetPrinterAdapter implements PrinterAdapter {
             
             printerOutputStream.write(SET_LINE_SPACE_32);
             printerOutputStream.write(LINE_FEED); 
+            printerOutputStream.write(SET_LINE_SPACE_32);
             printerOutputStream.write(LINE_FEED);
+            printerOutputStream.write(SET_LINE_SPACE_32);
             printerOutputStream.write(LINE_FEED);
-            printerOutputStream.write(LINE_FEED);            
+            printerOutputStream.write(SET_LINE_SPACE_32);
+            printerOutputStream.write(LINE_FEED);
+            printerOutputStream.write(SET_LINE_SPACE_32);
+            printerOutputStream.write(LINE_FEED);
+            printerOutputStream.write(SET_LINE_SPACE_32);
+            printerOutputStream.write(LINE_FEED);
+            printerOutputStream.write(SET_LINE_SPACE_32);
+            printerOutputStream.write(LINE_FEED);
+            printerOutputStream.write(SET_LINE_SPACE_32);
+            printerOutputStream.write(LINE_FEED);
+            printerOutputStream.write(SET_LINE_SPACE_32);
+            printerOutputStream.write(LINE_FEED);
+            printerOutputStream.write(SET_LINE_SPACE_32);
+            printerOutputStream.write(LINE_FEED);
+            printerOutputStream.write(SET_LINE_SPACE_32);
+            printerOutputStream.write(LINE_FEED);
+            printerOutputStream.write(SET_LINE_SPACE_32);
+            printerOutputStream.write(LINE_FEED);       
             printerOutputStream.flush();
             
         } catch (IOException e) {

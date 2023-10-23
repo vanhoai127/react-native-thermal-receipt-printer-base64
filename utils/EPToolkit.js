@@ -99,12 +99,12 @@ export function exchange_text(text, options) {
   }
 
   // check for "tailingLine" flag
-  if (
-    typeof m_options["tailingLine"] === "boolean" &&
-    options_controller["tailingLine"]
-  ) {
-    bytes.concat(options_controller["tailingLine"]);
-  }
+  // if (
+  //   typeof m_options["tailingLine"] === "boolean" &&
+  //   options_controller["tailingLine"]
+  // ) {
+  //   bytes.concat(options_controller["tailingLine"]);
+  // }
 
   // check for "cut" flag
   if (typeof m_options["cut"] === "boolean" && options_controller["cut"]) {
@@ -112,9 +112,9 @@ export function exchange_text(text, options) {
   }
 
   // check for "beep" flag
-  if (typeof m_options["beep"] === "boolean" && options_controller["beep"]) {
-    bytes.concat(options_controller["beep"]);
-  }
+  // if (typeof m_options["beep"] === "boolean" && options_controller["beep"]) {
+  //   bytes.concat(options_controller["beep"]);
+  // }
 
   return bytes.toBuffer();
 }

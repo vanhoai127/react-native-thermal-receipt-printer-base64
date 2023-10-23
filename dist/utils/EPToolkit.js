@@ -27,90 +27,96 @@ var cut_bytes = Buffer.from([27, 105]);
 var beep_bytes = Buffer.from([27, 66, 3, 2]);
 var line_bytes = Buffer.from([10, 10, 10, 10, 10]);
 var options_controller = {
-    cut: cut_bytes,
-    beep: beep_bytes,
-    tailingLine: line_bytes,
+  cut: cut_bytes,
+  beep: beep_bytes,
+  tailingLine: line_bytes,
 };
 var controller = {
-    "<M>": m_start_bytes,
-    "</M>": m_end_bytes,
-    "<B>": b_start_bytes,
-    "</B>": b_end_bytes,
-    "<D>": d_start_bytes,
-    "</D>": d_end_bytes,
-    "<C>": c_start_bytes,
-    "</C>": c_end_bytes,
-    "<CM>": cm_start_bytes,
-    "</CM>": cm_end_bytes,
-    "<CD>": cd_start_bytes,
-    "</CD>": cd_end_bytes,
-    "<CB>": cb_start_bytes,
-    "</CB>": cb_end_bytes,
-    "<L>": l_start_bytes,
-    "</L>": l_end_bytes,
-    "<R>": r_start_bytes,
-    "</R>": r_end_bytes,
+  "<M>": m_start_bytes,
+  "</M>": m_end_bytes,
+  "<B>": b_start_bytes,
+  "</B>": b_end_bytes,
+  "<D>": d_start_bytes,
+  "</D>": d_end_bytes,
+  "<C>": c_start_bytes,
+  "</C>": c_end_bytes,
+  "<CM>": cm_start_bytes,
+  "</CM>": cm_end_bytes,
+  "<CD>": cd_start_bytes,
+  "</CD>": cd_end_bytes,
+  "<CB>": cb_start_bytes,
+  "</CB>": cb_end_bytes,
+  "<L>": l_start_bytes,
+  "</L>": l_end_bytes,
+  "<R>": r_start_bytes,
+  "</R>": r_end_bytes,
 };
 var default_options = {
-    beep: false,
-    cut: true,
-    tailingLine: true,
-    encoding: "UTF8",
+  beep: false,
+  cut: true,
+  tailingLine: true,
+  encoding: "UTF8",
 };
 export function exchange_text(text, options) {
-    var m_options = options || default_options;
-    var bytes = new BufferHelper();
-    bytes.concat(init_printer_bytes);
-    bytes.concat(default_space_bytes);
-    var temp = "";
-    for (var i = 0; i < text.length; i++) {
-        var ch = text[i];
-        switch (ch) {
-            case "<":
-                bytes.concat(iconv.encode(temp, m_options.encoding));
-                temp = "";
-                // add bytes for changing font and justifying text
-                for (var tag in controller) {
-                    if (text.substring(i, i + tag.length) === tag) {
-                        bytes.concat(controller[tag]);
-                        i += tag.length - 1;
-                    }
-                }
-                break;
-            case "\n":
-                temp = "" + temp + ch;
-                bytes.concat(iconv.encode(temp, m_options.encoding));
-                bytes.concat(reset_bytes);
-                temp = "";
-                break;
-            default:
-                temp = "" + temp + ch;
-                break;
+  var m_options = options || default_options;
+  var bytes = new BufferHelper();
+  bytes.concat(init_printer_bytes);
+  bytes.concat(default_space_bytes);
+  var temp = "";
+  for (var i = 0; i < text.length; i++) {
+    var ch = text[i];
+    switch (ch) {
+      case "<":
+        bytes.concat(iconv.encode(temp, m_options.encoding));
+        temp = "";
+        // add bytes for changing font and justifying text
+        for (var tag in controller) {
+          if (text.substring(i, i + tag.length) === tag) {
+            bytes.concat(controller[tag]);
+            i += tag.length - 1;
+          }
         }
+        break;
+      case "\n":
+        temp = "" + temp + ch;
+        bytes.concat(iconv.encode(temp, m_options.encoding));
+        bytes.concat(reset_bytes);
+        temp = "";
+        break;
+      default:
+        temp = "" + temp + ch;
+        break;
     }
-    temp.length && bytes.concat(iconv.encode(temp, m_options.encoding));
+  }
+  temp.length && bytes.concat(iconv.encode(temp, m_options.encoding));
 
-    // check for "encoding" flag
-    if (typeof m_options["encoding"] === "boolean" && options_controller["encoding"]) {
-        bytes.concat(options_controller["encoding"]);
-    }
+  // check for "encoding" flag
+  if (
+    typeof m_options["encoding"] === "boolean" &&
+    options_controller["encoding"]
+  ) {
+    bytes.concat(options_controller["encoding"]);
+  }
 
-    // check for "tailingLine" flag
-    if (typeof m_options["tailingLine"] === "boolean" && options_controller["tailingLine"]) {
-        bytes.concat(options_controller["tailingLine"]);
-    }
+  // check for "tailingLine" flag
+  //   if (
+  //     typeof m_options["tailingLine"] === "boolean" &&
+  //     options_controller["tailingLine"]
+  //   ) {
+  //     bytes.concat(options_controller["tailingLine"]);
+  //   }
 
-    // check for "cut" flag
-    if (typeof m_options["cut"] === "boolean" && options_controller["cut"]) {
-        bytes.concat(options_controller["cut"]);
-    }
+  // check for "cut" flag
+  if (typeof m_options["cut"] === "boolean" && options_controller["cut"]) {
+    bytes.concat(options_controller["cut"]);
+  }
 
-    // check for "beep" flag
-    if (typeof m_options["beep"] === "boolean" && options_controller["beep"]) {
-        bytes.concat(options_controller["beep"]);
-    }
+  // check for "beep" flag
+  // if (typeof m_options["beep"] === "boolean" && options_controller["beep"]) {
+  //     bytes.concat(options_controller["beep"]);
+  // }
 
-    return bytes.toBuffer();
+  return bytes.toBuffer();
 }
 // export async function exchange_image(
 //   imagePath: string,

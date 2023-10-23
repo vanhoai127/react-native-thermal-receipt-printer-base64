@@ -1,6 +1,6 @@
 {
   "name": "react-native-thermal-receipt-printer-base64",
-  "version": "1.3.3",
+  "version": "1.3.8",
   "description": "Fork of react-native-printer. A React Native Library to support USB/BLE/Net printer",
   "main": "dist/index.js",
   "source": "dist/index.js",

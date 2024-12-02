@@ -281,10 +281,12 @@ public class NetPrinterAdapter implements PrinterAdapter {
                     printerOutputStream.write(recollectSlice(y, x, pixels));
                 }
                 // Do a line feed, if not the printing will resume on the same line
-                if(isImin != -1 )
-                {
-                    printerOutputStream.write(LINE_FEED);
-                }
+                // if(isImin != -1 )
+                // {
+                //     printerOutputStream.write(LINE_FEED);
+                // }
+                printerOutputStream.write(LINE_FEED);
+                printerOutputStream.write(LINE_FEED);
               
             }
             

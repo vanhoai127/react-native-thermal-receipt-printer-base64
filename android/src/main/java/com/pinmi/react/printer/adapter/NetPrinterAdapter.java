@@ -266,7 +266,7 @@ public class NetPrinterAdapter implements PrinterAdapter {
 
             OutputStream printerOutputStream = socket.getOutputStream();
 
-            printerOutputStream.write(SET_LINE_SPACE_24);
+            printerOutputStream.write(SET_LINE_SPACE_32);
             printerOutputStream.write(CENTER_ALIGN);
 
             for (int y = 0; y < pixels.length; y += 24) {
@@ -285,6 +285,7 @@ public class NetPrinterAdapter implements PrinterAdapter {
                 {
                     printerOutputStream.write(LINE_FEED);
                 }
+              
             }
             
             printerOutputStream.write(SET_LINE_SPACE_32);
